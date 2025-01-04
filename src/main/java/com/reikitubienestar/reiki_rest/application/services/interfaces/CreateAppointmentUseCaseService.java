@@ -1,4 +1,4 @@
-package com.reikitubienestar.reiki_rest.application.usescases.interfaces;
+package com.reikitubienestar.reiki_rest.application.services.interfaces;
 
 import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;
 

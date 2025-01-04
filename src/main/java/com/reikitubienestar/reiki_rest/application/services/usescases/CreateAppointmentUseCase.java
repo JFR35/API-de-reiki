@@ -1,2 +1,52 @@
-package com.reikitubienestar.reiki_rest.application.services.usescases;public class CreateAppointmentUseCase {
+package com.reikitubienestar.reiki_rest.application.services.usescases;
+
+
+import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;
+import com.reikitubienestar.reiki_rest.application.mapper.AppointmentMapper;
+import com.reikitubienestar.reiki_rest.application.services.interfaces.CreateAppointmentUseCaseService;
+import com.reikitubienestar.reiki_rest.domain.models.Appointment;
+import com.reikitubienestar.reiki_rest.domain.ports.out.AppointmentRepository;
+import com.reikitubienestar.reiki_rest.infraestructure.adapters.out.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+
+@Service
+public class CreateAppointmentUseCase implements CreateAppointmentUseCaseService {
+
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+    @Autowired
+    private AppointmentMapper appointmentMapper;
+    @Autowired
+    private IsValidCitaTimeService isValidCitaTimeService;
+    @Autowired
+    private IsBelowMaxCitasService isBelowMaxCitasService;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Override
+    public AppointmentDTO createAppointment(AppointmentDTO appointmentDTO) {
+        LocalDateTime dateReservation = appointmentDTO.getDateReservation();
+        if (dateReservation.isBefore(LocalDateTime.now())) {
+            throw new InvalidAppointmentTimeException("Reservation date can't be in the past");
+        }
+        if (!isValidCitaTimeService.isValidCitaTime(dateReservation)) {
+            throw new InvalidAppointmentTimeException("Invalid time for appointment");
+        }
+        if (!isBelowMaxCitasService.isBelowMaxCitas(dateReservation)) {
+            throw new com.reikitubienestar.api_reiki.domain.exceptions.MaxAppointmentsReachedException("Maximum number of appointments reached for this time slot");
+        }
+        Appointment appointment = appointmentMapper.dtoToEntity(appointmentDTO);
+        Appointment savedAppointment = appointmentRepository.save(appointment);
+
+
+        // Enviar correo al usuario
+        emailService.sendEmail(appointmentDTO.getEmail(), "Confirmación de Cita", "Tu cita ha sido reservada para: " + dateReservation);
+        // Enviar correo al empleado
+        emailService.sendEmail("empleado@example.com", "Nueva Reserva de Cita", "Nueva cita reservada para " + dateReservation + " por " + appointmentDTO.getFirstName() + " " + appointmentDTO.getLastName() + " El día: " + appointmentDTO.getDateReservation() + " Con telefono: " + appointmentDTO.getTlph());
+        return appointmentMapper.entityToDTO(savedAppointment);
+    }
 }
