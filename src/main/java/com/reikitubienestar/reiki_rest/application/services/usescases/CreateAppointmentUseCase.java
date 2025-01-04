@@ -2,10 +2,14 @@ package com.reikitubienestar.reiki_rest.application.services.usescases;
 
 
 import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;
+import com.reikitubienestar.reiki_rest.application.exception.InvalidAppointmentTimeException;
+import com.reikitubienestar.reiki_rest.application.exception.MaxAppointmentException;
 import com.reikitubienestar.reiki_rest.application.mapper.AppointmentMapper;
 import com.reikitubienestar.reiki_rest.application.services.interfaces.CreateAppointmentUseCaseService;
 import com.reikitubienestar.reiki_rest.domain.models.Appointment;
 import com.reikitubienestar.reiki_rest.domain.ports.out.AppointmentRepository;
+import com.reikitubienestar.reiki_rest.domain.services.interfaces.IsBelowMaxAppointmentsService;
+import com.reikitubienestar.reiki_rest.domain.services.interfaces.IsValidAppointmentTimeService;
 import com.reikitubienestar.reiki_rest.infraestructure.adapters.out.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +24,9 @@ public class CreateAppointmentUseCase implements CreateAppointmentUseCaseService
     @Autowired
     private AppointmentMapper appointmentMapper;
     @Autowired
-    private IsValidCitaTimeService isValidCitaTimeService;
+    private IsValidAppointmentTimeService isValidAppointmentTimeService;
     @Autowired
-    private IsBelowMaxCitasService isBelowMaxCitasService;
-
+    private IsBelowMaxAppointmentsService isBelowMaxAppointmentsService;
     @Autowired
     private EmailService emailService;
 
@@ -33,16 +36,14 @@ public class CreateAppointmentUseCase implements CreateAppointmentUseCaseService
         if (dateReservation.isBefore(LocalDateTime.now())) {
             throw new InvalidAppointmentTimeException("Reservation date can't be in the past");
         }
-        if (!isValidCitaTimeService.isValidCitaTime(dateReservation)) {
+        if (!isValidAppointmentTimeService.isValidAppointmentTime(dateReservation)) {
             throw new InvalidAppointmentTimeException("Invalid time for appointment");
         }
-        if (!isBelowMaxCitasService.isBelowMaxCitas(dateReservation)) {
-            throw new com.reikitubienestar.api_reiki.domain.exceptions.MaxAppointmentsReachedException("Maximum number of appointments reached for this time slot");
+        if (!isBelowMaxAppointmentsService.isBelowMaxAppoinemntService(dateReservation)) {
+            throw new MaxAppointmentException("Over Booking");
         }
         Appointment appointment = appointmentMapper.dtoToEntity(appointmentDTO);
         Appointment savedAppointment = appointmentRepository.save(appointment);
-
-
         // Enviar correo al usuario
         emailService.sendEmail(appointmentDTO.getEmail(), "Confirmación de Cita", "Tu cita ha sido reservada para: " + dateReservation);
         // Enviar correo al empleado
