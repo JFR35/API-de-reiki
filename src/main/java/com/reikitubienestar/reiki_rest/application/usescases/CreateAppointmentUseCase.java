@@ -1,11 +1,11 @@
-package com.reikitubienestar.reiki_rest.application.services.usescases;
+package com.reikitubienestar.reiki_rest.application.usescases;
 
 
 import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;
 import com.reikitubienestar.reiki_rest.application.exception.InvalidAppointmentTimeException;
 import com.reikitubienestar.reiki_rest.application.exception.MaxAppointmentException;
 import com.reikitubienestar.reiki_rest.application.mapper.AppointmentMapper;
-import com.reikitubienestar.reiki_rest.application.services.interfaces.CreateAppointmentUseCaseService;
+import com.reikitubienestar.reiki_rest.domain.ports.in.CreateAppointmentUseCaseService;
 import com.reikitubienestar.reiki_rest.domain.models.Appointment;
 import com.reikitubienestar.reiki_rest.domain.ports.out.AppointmentRepository;
 import com.reikitubienestar.reiki_rest.domain.services.interfaces.IsBelowMaxAppointmentsService;

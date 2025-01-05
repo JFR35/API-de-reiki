@@ -23,6 +23,7 @@ public class JpaAppointmentRepository implements AppointmentRepository {
         // Verifica que el repositorio ha sido inyectado correctamente
         System.out.println("JpaAppointmentRepository initialized: " + (repository != null));
     }
+
     @Override
     public List<Appointment> findAll() {
         try {
@@ -68,3 +69,6 @@ public class JpaAppointmentRepository implements AppointmentRepository {
         }
     }
 }
+/*
+La clase JpaAppointmentRepository implementa la interfaz del repositorio y maneja las excepciones relacionadas con la base de datos.
+ */

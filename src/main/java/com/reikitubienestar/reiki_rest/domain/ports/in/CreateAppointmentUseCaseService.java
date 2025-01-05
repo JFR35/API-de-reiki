@@ -1,4 +1,4 @@
-package com.reikitubienestar.reiki_rest.application.services.interfaces;
+package com.reikitubienestar.reiki_rest.domain.ports.in;
 
 import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;
 

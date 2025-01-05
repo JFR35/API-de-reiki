@@ -17,6 +17,7 @@ public interface AppointmentRepository {
 }
 
 /*
+Aquí defines las interfaces para interactuar con las tecnologías externas, como bases de datos.
 Flujo del caso de uso:
 1.El controlador o servicio llama al AppointmentRepository (el puerto) que define las operaciones necesarias.
 2.JpaAppointmentRepository (el adaptador de salida) implementa esta interfaz y delega las llamadas a SpringDataAppointmentRepository.

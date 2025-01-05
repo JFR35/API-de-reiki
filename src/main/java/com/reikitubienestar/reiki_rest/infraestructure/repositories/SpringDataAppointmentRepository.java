@@ -10,4 +10,6 @@ import java.time.LocalDateTime;
 public interface SpringDataAppointmentRepository extends JpaRepository<Appointment, Long> {
     long countByDateReservationBetween(LocalDateTime start, LocalDateTime end);
 }
-
+/*
+Este repositorio extiende JpaRepository y proporciona métodos para interactuar con la base de datos.
+ */
