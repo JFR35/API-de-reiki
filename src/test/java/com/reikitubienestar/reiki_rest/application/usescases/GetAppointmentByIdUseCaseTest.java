@@ -1,7 +1,7 @@
 package com.reikitubienestar.reiki_rest.application.usescases;
 
 import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;
-import com.reikitubienestar.reiki_rest.application.exception.AppointmenNotFoundException;
+import com.reikitubienestar.reiki_rest.application.exception.AppointmentNotFoundException;
 import com.reikitubienestar.reiki_rest.application.mapper.AppointmentMapper;
 import com.reikitubienestar.reiki_rest.domain.models.Appointment;
 import com.reikitubienestar.reiki_rest.domain.ports.out.AppointmentRepository;
@@ -57,6 +57,6 @@ class GetAppointmentByIdUseCaseTest {
         Long appointmentId = 1L;
         when(appointmentRepository.findById(appointmentId)).thenReturn(Optional.empty());
 
-        assertThrows(AppointmenNotFoundException.class, () -> getAppointmentByIdUseCase.getAppointmentById(appointmentId));
+        assertThrows(AppointmentNotFoundException.class, () -> getAppointmentByIdUseCase.getAppointmentById(appointmentId));
     }
 }

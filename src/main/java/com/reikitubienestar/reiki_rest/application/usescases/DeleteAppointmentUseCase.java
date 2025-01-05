@@ -1,6 +1,6 @@
 package com.reikitubienestar.reiki_rest.application.usescases;
 
-import com.reikitubienestar.reiki_rest.application.exception.AppointmenNotFoundException;
+import com.reikitubienestar.reiki_rest.application.exception.AppointmentNotFoundException;
 import com.reikitubienestar.reiki_rest.application.mapper.AppointmentMapper;
 import com.reikitubienestar.reiki_rest.domain.ports.in.DeleteAppointmentUseCaseImp;
 import com.reikitubienestar.reiki_rest.domain.ports.out.AppointmentRepository;
@@ -16,7 +16,7 @@ public class DeleteAppointmentUseCase implements DeleteAppointmentUseCaseImp {
 
     public void deleteAppointmentById(Long id) {
         if (appointmentRepository.findById(id).isEmpty()) {
-            throw new AppointmenNotFoundException("Appointment not found by id:  " + id);
+            throw new AppointmentNotFoundException("Appointment not found by id:  " + id);
         }
         appointmentRepository.deleteById(id);
     }
