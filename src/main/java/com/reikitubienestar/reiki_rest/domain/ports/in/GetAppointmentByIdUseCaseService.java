@@ -1,10 +1,10 @@
 package com.reikitubienestar.reiki_rest.domain.ports.in;
 
-import com.reikitubienestar.reiki_rest.domain.models.Appointment;
+import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;
 
 import java.util.Optional;
 
 public interface GetAppointmentByIdUseCaseService {
-    Optional<Appointment> getAppointmentById(Long id);
+    Optional<AppointmentDTO> getAppointmentById(Long id);
 }
 

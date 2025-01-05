@@ -1,6 +1,6 @@
 package com.reikitubienestar.reiki_rest.application.usescases;
 
-import com.reikitubienestar.reiki_rest.application.exception.AppointmenNotFoundException;
+import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;
 import com.reikitubienestar.reiki_rest.application.mapper.AppointmentMapper;
 import com.reikitubienestar.reiki_rest.domain.ports.in.GetAppointmentByIdUseCaseService;
 import com.reikitubienestar.reiki_rest.domain.models.Appointment;
@@ -18,11 +18,12 @@ public class GetAppointmentByIdUseCase implements GetAppointmentByIdUseCaseServi
     @Autowired
     private AppointmentMapper appointmentMapper;
 
-    @Override
-    public Optional<Appointment> getAppointmentById(Long id) {
-        if(appointmentRepository.findById(id).isEmpty()){
-            throw new AppointmenNotFoundException("Appointment not found by id:  " + id);
+    public Optional<AppointmentDTO> getAppointmentById(Long appointmentId) {
+        Optional<Appointment> appointmentOptional = appointmentRepository.findById(appointmentId);
+        if (appointmentOptional.isPresent()) {
+            AppointmentDTO appointmentDTO = appointmentMapper.entityToDTO(appointmentOptional.get());
+            return Optional.of(appointmentDTO);
         }
-        return appointmentRepository.findById(id);
+        return Optional.empty();
     }
 }
