@@ -1,6 +1,7 @@
-package com.reikitubienestar.reiki_rest.domain.models;
+package com.reikitubienestar.reiki_rest.unit.domain.models;
 
 
+import com.reikitubienestar.reiki_rest.domain.models.Appointment;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

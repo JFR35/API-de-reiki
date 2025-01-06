@@ -1,5 +1,6 @@
-package com.reikitubienestar.reiki_rest.application.usescases;
+package com.reikitubienestar.reiki_rest.unit.application.usescases;
 
+import com.reikitubienestar.reiki_rest.application.usescases.DeleteAppointmentUseCase;
 import com.reikitubienestar.reiki_rest.domain.models.Appointment;
 import com.reikitubienestar.reiki_rest.domain.ports.out.AppointmentRepository;
 import org.junit.jupiter.api.BeforeEach;

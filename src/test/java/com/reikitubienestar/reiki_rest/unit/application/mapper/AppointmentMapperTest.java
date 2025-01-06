@@ -1,6 +1,7 @@
-package com.reikitubienestar.reiki_rest.application.mapper;
+package com.reikitubienestar.reiki_rest.unit.application.mapper;
 
 import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;
+import com.reikitubienestar.reiki_rest.application.mapper.AppointmentMapper;
 import com.reikitubienestar.reiki_rest.domain.models.Appointment;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;

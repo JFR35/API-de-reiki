@@ -1,6 +1,7 @@
-package com.reikitubienestar.reiki_rest.domain.services.impl;
+package com.reikitubienestar.reiki_rest.unit.domain.services.impl;
 
 import com.reikitubienestar.reiki_rest.domain.ports.out.AppointmentRepository;
+import com.reikitubienestar.reiki_rest.domain.services.impl.IsBelowMaxAppointmentsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
