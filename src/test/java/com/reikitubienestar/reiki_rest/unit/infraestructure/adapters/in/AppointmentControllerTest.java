@@ -1,4 +1,4 @@
-package com.reikitubienestar.reiki_rest.unit.infraestructure.adapters.services.in;
+package com.reikitubienestar.reiki_rest.unit.infraestructure.adapters.in;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reikitubienestar.reiki_rest.application.dto.AppointmentDTO;

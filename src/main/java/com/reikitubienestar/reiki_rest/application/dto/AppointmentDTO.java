@@ -1,6 +1,7 @@
 package com.reikitubienestar.reiki_rest.application.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -29,7 +30,7 @@ public class AppointmentDTO {
     private String tlph;
 
     @NotNull(message = "Reservation date is mandatory")
-    //@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateReservation;
 
     public Long getId() {

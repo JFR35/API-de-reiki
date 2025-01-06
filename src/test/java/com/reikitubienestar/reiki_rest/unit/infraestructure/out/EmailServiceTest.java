@@ -1,4 +1,4 @@
-package com.reikitubienestar.reiki_rest.unit.out;
+package com.reikitubienestar.reiki_rest.unit.infraestructure.out;
 
 import com.reikitubienestar.reiki_rest.infraestructure.adapters.out.EmailService;
 import org.junit.jupiter.api.BeforeEach;
