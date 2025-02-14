@@ -14,6 +14,7 @@ public class EmailService {
     public void sendEmail(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
+        message.setFrom("juanfajardoreyes@hotmail.com"); // Asegúrate de usar el mismo correo configurado en spring.mail.username
         message.setSubject(subject);
         message.setText(text);
         emailSender.send(message);
